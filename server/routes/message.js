@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 const Message = require("../models/Message.js");
+const uuid = require("uuid");
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -13,7 +14,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("", async (req, res) => {
   const { text } = req.body;
-  const newMessage = new Message({ text });
+  const uid = uuid.v4().substring(0, 7);
+  const newMessage = new Message({ text, uid });
   await newMessage.save();
   res.status(201).send(newMessage);
 });

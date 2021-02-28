@@ -3,10 +3,7 @@ const uuid = require("uuid");
 
 messageSchema = new Schema({
   text: String,
-  uid: {
-    type: String,
-    default: uuid.v4().substring(0, 7),
-  },
+  uid: String,
 });
 
 const Message = model("Message", messageSchema);

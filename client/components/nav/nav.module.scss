@@ -1,0 +1,15 @@
+.container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  a {
+    font-size: 16px;
+
+    &:hover {
+      color: grey;
+    }
+  }
+  // max-width: 450px;
+}
