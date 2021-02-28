@@ -8,7 +8,7 @@ router.get("/:id", async (req, res) => {
   const requested = await Message.findOne({ uid: id });
   if (requested) res.json(requested);
   else {
-    res.status(404).send("");
+    res.send("");
   }
 });
 

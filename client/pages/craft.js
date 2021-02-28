@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/Craft.module.scss";
 import { url } from "../constants";
 import axios from "axios";
+import Popup from "../components/popup/Popup";
 
 const Craft = () => {
   const [message, setMessage] = useState("");
   const [charsLeft, setCharsleft] = useState(25);
   const [word, setWord] = useState("characters");
   const [buttonText, setButtonText] = useState("Generate code");
+  const [popup, setPopup] = useState({ show: false, code: "" });
 
   useEffect(() => {
     setCharsleft(30 - message.length);
@@ -30,11 +32,18 @@ const Craft = () => {
       },
     });
     setButtonText("Generate code");
-    console.log(resp.data.uid);
+    setMessage("");
+    setPopup({ show: true, code: resp.data.uid });
   };
 
   return (
     <div className={styles.container}>
+      {popup.show && (
+        <Popup
+          onClose={() => setPopup({ ...popup, show: false })}
+          code={popup.code}
+        />
+      )}
       <section className={styles.headings}>
         <h2>Write it.</h2>
         <h2>Share the code.</h2>
