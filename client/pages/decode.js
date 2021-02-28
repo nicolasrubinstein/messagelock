@@ -7,18 +7,24 @@ const Decode = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [code, setCode] = useState("");
+  const [status, setStatus] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!code.length) return;
+    setMessage("");
     setIsLoading(true);
     const resp = await axios({
       method: "get",
       url: `${url}/${code}`,
     });
-    if (resp.status === 400) {
-      console.log("st 400");
+    if (!resp.data.text) {
+      setMessage("Sorry, we couldn't find your message!");
+      setIsLoading(false);
+      setStatus(false);
       return;
     }
+    setStatus(true);
     setIsLoading(false);
     setMessage(resp.data.text);
   };
@@ -43,6 +49,9 @@ const Decode = () => {
       </form>
       <section>
         <h4 style={{ fontWeight: "400" }}>{isLoading && "Working on it..."}</h4>
+        <h3 style={{ fontWeight: "400" }}>
+          {message && status && "Your secret message is:"}
+        </h3>
         <h2>{message}</h2>
       </section>
     </div>

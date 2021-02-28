@@ -9,7 +9,7 @@ const Home = () => {
   }, []);
   return (
     <div className={styles.container}>
-      <h1 id="title">{"{{name}}"}</h1>
+      <h1 id="title">MessageLock</h1>
       <h2 className={styles.slogan}>Where your messages remain secret.</h2>
       <div className={styles.moving}>
         <Image src="/padlock.gif" width={300} height={300} />
